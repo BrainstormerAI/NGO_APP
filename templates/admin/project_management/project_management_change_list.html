@@ -96,28 +96,230 @@
       display: none;
     }
 
-    /* Table styles */
+    /* Enhanced Table styles */
     #changelist {
       width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
     .results {
       width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
     }
 
     #result_list {
       width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
+    /* Table header styling */
+    #result_list thead th {
+      background: #417690;
+      color: white;
+      padding: 12px 8px;
+      text-align: left;
+      font-weight: bold;
+      border-bottom: 2px solid #2c5aa0;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    #result_list thead th a {
+      color: white;
+      text-decoration: none;
+    }
+
+    #result_list thead th a:hover {
+      color: #f0f0f0;
+    }
+
+    /* Table body styling */
+    #result_list tbody tr {
+      border-bottom: 1px solid #dee2e6;
+      transition: background-color 0.2s ease;
+    }
+
+    #result_list tbody tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    #result_list tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    #result_list tbody tr:nth-child(even):hover {
+      background-color: #f0f0f0;
+    }
+
+    #result_list tbody td {
+      padding: 12px 8px;
+      vertical-align: middle;
+      border-right: 1px solid #eee;
+    }
+
+    #result_list tbody td:last-child {
+      border-right: none;
+    }
+
+    /* Column width adjustments */
+    #result_list th:nth-child(1), /* ID */
+    #result_list td:nth-child(1) {
+      width: 60px;
+      text-align: center;
+    }
+
+    #result_list th:nth-child(2), /* Name */
+    #result_list td:nth-child(2) {
+      width: 200px;
+      max-width: 200px;
+    }
+
+    #result_list th:nth-child(3), /* Image */
+    #result_list td:nth-child(3) {
+      width: 80px;
+      text-align: center;
+    }
+
+    #result_list th:nth-child(4), /* Description */
+    #result_list td:nth-child(4) {
+      width: 300px;
+      max-width: 300px;
+      word-wrap: break-word;
+    }
+
+    #result_list th:nth-child(5), /* Modified Date */
+    #result_list td:nth-child(5) {
+      width: 150px;
+      white-space: nowrap;
+    }
+
+    #result_list th:nth-child(6), /* Status */
+    #result_list td:nth-child(6) {
+      width: 100px;
+      text-align: center;
+    }
+
+    #result_list th:nth-child(7), /* Actions */
+    #result_list td:nth-child(7) {
+      width: 150px;
+      text-align: center;
+    }
+
+    /* Image styling */
+    .preview-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+
+    .no-image {
+      color: #6c757d;
+      font-style: italic;
+      font-size: 0.9em;
+    }
+
+    /* Status badge styling */
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-active {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-inactive {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    /* Action buttons styling */
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .action-button {
+      padding: 6px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85em;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .edit-button {
+      background: #007bff;
+      color: white;
+    }
+
+    .edit-button:hover {
+      background: #0056b3;
+      color: white;
+    }
+
+    .delete-button {
+      background: #dc3545;
+      color: white;
+    }
+
+    .delete-button:hover {
+      background: #c82333;
+      color: white;
+    }
+
+    .view-button {
+      background: #28a745;
+      color: white;
+    }
+
+    .view-button:hover {
+      background: #218838;
+      color: white;
+    }
+
+    /* Remove default changelist styles that interfere */
     .change-list .filtered .results {
       width: 100% !important;
       margin-right: 0 !important;
+    }
+
+    .change-list .filtered #changelist {
+      width: 100% !important;
     }
 
     /* Search form styles */
     #changelist-search {
       width: 100%;
       margin-bottom: 15px;
+      background: white;
+      padding: 15px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     #changelist-search label {
@@ -125,10 +327,11 @@
     }
 
     #changelist-search input[type="text"] {
-      padding: 8px;
-      width: 250px;
+      padding: 8px 12px;
+      width: 300px;
       border: 1px solid #ddd;
       border-radius: 4px;
+      font-size: 14px;
     }
 
     #changelist-search input[type="submit"] {
@@ -138,9 +341,79 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
+    #changelist-search input[type="submit"]:hover {
+      background: #2c5aa0;
+    }
+
+    /* Pagination styling */
+    .paginator {
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive design */
+    @media (max-width: 1200px) {
+      .filter-row {
+        flex-wrap: wrap;
+      }
+
+      .filter-item {
+        flex: 1 1 300px;
+      }
+
+      .filter-buttons {
+        flex: 1 1 100%;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .results {
+        overflow-x: scroll;
+      }
+
+      #result_list {
+        min-width: 800px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .action-button {
+        font-size: 0.75em;
+        padding: 4px 8px;
+      }
+    }
+
+    /* No data message */
+    .no-data {
+      text-align: center;
+      color: #6c757d;
+      font-style: italic;
+      padding: 40px;
+      background: #f8f9fa;
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
     }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {% endblock %}
 
 {% block content %}
@@ -151,6 +424,7 @@
           {% if has_add_permission %}
             <li>
               <a href="{% url cl.opts|admin_urlname:'add' %}" class="addlink">
+                <i class="fas fa-plus"></i>
                 {% blocktranslate with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktranslate %}
               </a>
             </li>
@@ -164,31 +438,36 @@
       <form id="changelist-filter-form" method="GET">
         <div class="filter-row">
           <div class="filter-item">
-            <label class="filter-label">Status:</label>
+            <label class="filter-label"><i class="fas fa-toggle-on"></i> Status:</label>
             <select name="status" class="filter-select">
-              <option value="">All</option>
+              <option value="">All Status</option>
               <option value="active" {% if request.GET.status == 'active' %}selected{% endif %}>Active</option>
               <option value="inactive" {% if request.GET.status == 'inactive' %}selected{% endif %}>Inactive</option>
             </select>
           </div>
           <div class="filter-item">
-            <label class="filter-label">Modified Date:</label>
+            <label class="filter-label"><i class="fas fa-calendar"></i> Modified Date:</label>
             <input type="text" name="modified_date" class="datepicker" placeholder="Select date"
                    value="{{ request.GET.modified_date|default:'' }}" autocomplete="off">
           </div>
           <div class="filter-buttons">
-            <button type="submit" class="filter-button apply-filter">Apply Filters</button>
-            <button type="button" class="filter-button clear-filter" onclick="clearFilters()">Clear Filters</button>
+            <button type="submit" class="filter-button apply-filter">
+              <i class="fas fa-filter"></i> Apply Filters
+            </button>
+            <button type="button" class="filter-button clear-filter" onclick="clearFilters()">
+              <i class="fas fa-times"></i> Clear Filters
+            </button>
           </div>
         </div>
       </form>
     </div>
 
-    <!-- Results -->
+    <!-- Search -->
     {% if cl.search_fields %}
       {% block search %}{% search_form cl %}{% endblock %}
     {% endif %}
 
+    <!-- Results -->
     <div id="changelist" class="module filtered">
       {% block date_hierarchy %}{% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}{% endblock %}
 
@@ -213,10 +492,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize date picker
-      flatpickr(".datepicker", {
+            flatpickr(".datepicker", {
         dateFormat: "Y-m-d",
         allowInput: true,
-        wrap: true,
+        wrap: false,
         defaultDate: "{{ request.GET.modified_date|default:'' }}"
       });
 
@@ -224,6 +503,26 @@
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
       console.log('Current UTC Time:', formattedDate);
+
+      // Add loading state for table
+      const table = document.getElementById('result_list');
+      if (table && table.rows.length <= 1) {
+        const tbody = table.querySelector('tbody');
+        if (tbody && tbody.children.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="100%" class="no-data"><i class="fas fa-inbox"></i> No projects found</td></tr>';
+        }
+      }
+
+      // Enhance action buttons with icons
+      document.querySelectorAll('.action-button').forEach(button => {
+        if (button.textContent.includes('Edit') && !button.querySelector('.fas')) {
+          button.innerHTML = '<i class="fas fa-edit"></i> ' + button.textContent;
+        } else if (button.textContent.includes('Delete') && !button.querySelector('.fas')) {
+          button.innerHTML = '<i class="fas fa-trash"></i> ' + button.textContent;
+        } else if (button.textContent.includes('View') && !button.querySelector('.fas')) {
+          button.innerHTML = '<i class="fas fa-eye"></i> ' + button.textContent;
+        }
+      });
     });
 
     // Clear filters function
@@ -231,7 +530,22 @@
       const form = document.getElementById('changelist-filter-form');
       form.querySelector('select[name="status"]').value = '';
       form.querySelector('input[name="modified_date"]').value = '';
-      form.submit();
+
+      // Clear URL parameters
+      const url = new URL(window.location);
+      url.searchParams.delete('status');
+      url.searchParams.delete('modified_date');
+      window.location.href = url.toString();
     }
+
+    // Add confirmation for delete actions
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.delete-button')) {
+        if (!confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
+          e.preventDefault();
+        }
+      }
+    });
   </script>
 {% endblock %}
+

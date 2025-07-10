@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div class="module">
+    <h2>Projects Management</h2>
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'admin:project_management_projectmanagement_add' %}" class="addlink">
+            ADD DATA
+        </a>
+    </div>
+
+    <table id="project-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Modified Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in object_list %}
+            <tr>
+                <td>{{ project.project_id }}</td>
+                <td>{{ project.project_name }}</td>
+                <td>
+                    {% if project.featured_image %}
+                    <img src="{{ project.featured_image.url }}" width="50" height="50" style="border-radius: 5px;">
+                    {% else %}
+                    No Image
+                    {% endif %}
+                </td>
+                <td>{{ project.description|truncatechars:100 }}</td>
+                <td>{{ project.modified_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ project.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'admin:project_management_projectmanagement_change' project.pk %}" class="button">Edit</a>
+                    <a href="{% url 'admin:project_management_projectmanagement_delete' project.pk %}" class="button deletelink">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No projects available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

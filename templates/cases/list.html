@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div class="module">
+    <h2>Cases Management</h2>
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'admin:cases_case_add' %}" class="addlink">
+            ADD DATA
+        </a>
+    </div>
+    
+    <table id="cases-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Modified Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in object_list %}
+            <tr>
+                <td>{{ case.case_id }}</td>
+                <td>{{ case.case_name }}</td>
+                <td>
+                    {% if case.featured_image %}
+                    <img src="{{ case.featured_image.url }}" width="50" height="50" style="border-radius: 5px;">
+                    {% else %}
+                    No Image
+                    {% endif %}
+                </td>
+                <td>{{ case.description|truncatechars:100 }}</td>
+                <td>{{ case.modified_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ case.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'admin:cases_case_change' case.pk %}" class="button">Edit</a>
+                    <a href="{% url 'admin:cases_case_delete' case.pk %}" class="button deletelink">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No cases available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
